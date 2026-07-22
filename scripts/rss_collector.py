@@ -1,24 +1,9 @@
-"""
-Kenyan News RSS Collector
---------------------------
-Pulls headlines from a set of Kenyan news RSS feeds and appends new
-(non-duplicate) entries to a CSV. Safe to run repeatedly (e.g. daily) --
-it only adds headlines it hasn't seen before, using the article link
-as the unique key.
-
-Requirements:
-    pip install feedparser
-
-Usage:
-    python rss_collector.py
-"""
-
 import csv
 import os
 import feedparser
 from datetime import datetime, timezone
 
-# Add/remove feeds here as you verify working URLs
+# Add/remove feeds here 
 FEEDS = {
     "Standard - Headlines": "https://www.standardmedia.co.ke/rss/headlines.php",
     "Standard - Kenya News": "https://www.standardmedia.co.ke/rss/kenya.php",
@@ -35,8 +20,8 @@ FEEDS = {
     "Kenya News Agency": "https://www.kenyanews.go.ke/feed/",
 }
 
-OUTPUT_FILE = "kenyan_headlines.csv"
-
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_FILE = os.path.join(SCRIPT_DIR, "..", "data", "raw", "kenyan_headlines.csv")
 
 def load_existing_links(filepath):
     """Return the set of article links already saved, so we don't duplicate."""
@@ -76,7 +61,7 @@ def collect():
 
         print(f"  {source_name}: found {len(parsed.entries)} entries in feed")
 
-    # Append to CSV (create with header if it doesn't exist yet)
+    # Append to CSV 
     file_exists = os.path.exists(OUTPUT_FILE)
     with open(OUTPUT_FILE, "a", encoding="utf-8", newline="") as f:
         fieldnames = ["source", "headline", "summary", "published", "link", "collected_at"]
