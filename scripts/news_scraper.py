@@ -1,21 +1,3 @@
-"""
-Kenyan News Scraper (historical headlines)
--------------------------------------------
-Unlike RSS (which only shows what's currently live), this scrapes a set of
-category/section pages for each outlet to pull a bulk snapshot of headlines.
-
-Strategy: instead of fighting pagination/infinite-scroll on a single section,
-we hit MANY section pages once each (Kenya, World, Business, Sports, etc.)
-to get breadth. Each site's article links are identified by a URL pattern
-(regex), not fragile CSS class names, so this is more resistant to site
-redesigns than selector-based scraping.
-
-Requirements:
-    pip install requests beautifulsoup4
-
-Usage:
-    python news_scraper.py
-"""
 
 import csv
 import os
@@ -38,9 +20,7 @@ HEADERS = {
 # Seconds to wait between requests -- avoid hammering the server / getting blocked
 REQUEST_DELAY = 2
 
-# -----------------------------------------------------------------------
 # Site configuration
-# -----------------------------------------------------------------------
 # Each site has:
 #   - "pages": list of section/category URLs to scrape (breadth strategy)
 #   - "article_pattern": regex that a real article URL matches (filters out
@@ -82,7 +62,7 @@ SITES = {
         "paginate": None,  # no clean pagination found -- rely on breadth instead
     },
     "NTV Kenya": {
-        # Base category pages -- paginate param below appends /page/N/ to each
+        # Base category pages 
         "pages": [
             "https://ntvkenya.co.ke/newsfeatures/",
             "https://ntvkenya.co.ke/politics/",

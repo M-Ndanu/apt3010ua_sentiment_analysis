@@ -3,7 +3,12 @@ import pandas as pd
 import requests
 import time
 from datetime import datetime
-from google.colab import files
+# from google.colab import files
+
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_FILE = os.path.join(SCRIPT_DIR, "..", "data", "raw", "headlines_kenya.csv")
 
 print(" Setup done!\n")
 
@@ -54,7 +59,7 @@ def fetch_rss():
                     "fetch_method": "RSS"
                 })
                 added += 1
-            print(f"   ✓ {name} → {added}")
+            print(f"    {name} → {added}")
             time.sleep(0.7)
         except:
             print(f"   ✗ {name}")
@@ -85,9 +90,11 @@ def fetch_newsdata(key):
     pages = 0
     while pages < 8:
         try:
+            params = {"apikey": key, "q": "Kenya", "language": "en"}
+            if next_page:
+                params["page"] = next_page
             r = requests.get("https://newsdata.io/api/1/news",
-                params={"apikey": key, "q": "Kenya", "language": "en", "page": next_page} if next_page else
-                      {"apikey": key, "q": "Kenya", "language": "en"},
+                params=params,
                 headers=HEADERS, timeout=15)
             if r.status_code != 200: break
             data = r.json()
@@ -147,16 +154,15 @@ df = df.drop_duplicates(subset=['clean', 'source']).drop(columns=['clean'])
 df = df.sort_values(by=['source', 'headline']).reset_index(drop=True)
 
 
-timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-filename = f"kenya_news_{timestamp}_{len(df)}_records.csv"
-df.to_csv(filename, index=False)
+os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
+df.to_csv(OUTPUT_FILE, index=False)
 
 print("\n" + "="*70)
 print(" COLLECTION COMPLETE!")
 print(f"Total unique records: {len(df)}")
-print(f"Saved as: {filename}")
+print(f"Saved as: {OUTPUT_FILE}")
 print("="*70)
 print("\nTop Sources:")
 print(df['source'].value_counts().head(12))
 
-files.download(filename)
+# files.download(filename)
