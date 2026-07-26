@@ -7,8 +7,7 @@ RAW_DIR = "../data/raw"
 OUTPUT_DIR = "../data/processed"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "master_headlines.csv")
 
-# The final lean schema -- extra columns
-# get dropped if present, since they're not needed for labeling/training
+#extra columns get dropped if present, since they're not needed for labeling/training
 KEEP_COLUMNS = ["source", "headline", "published", "link"]
 
 SYNTHETIC_PATTERN = re.compile(r"\bvariant\s*\d+\b", re.IGNORECASE)
