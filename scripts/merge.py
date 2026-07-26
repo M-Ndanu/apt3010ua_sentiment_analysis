@@ -7,9 +7,18 @@ RAW_DIR = "../data/raw"
 OUTPUT_DIR = "../data/processed"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "master_headlines.csv")
 
-# The final lean schema -- extra columns (like "summary", "collected_at")
+# The final lean schema -- extra columns
 # get dropped if present, since they're not needed for labeling/training
 KEEP_COLUMNS = ["source", "headline", "published", "link"]
+
+SYNTHETIC_PATTERN = re.compile(r"\bvariant\s*\d+\b", re.IGNORECASE)
+
+#remove AI generated content from the dataset
+def is_synthetic(text):
+    """Flag likely placeholder/auto-generated rows, e.g. 'Maize subsidies variant 905'."""
+    if not isinstance(text, str):
+        return False
+    return bool(SYNTHETIC_PATTERN.search(text))
 
 
 def normalize_headline(text):
@@ -66,14 +75,22 @@ def clean_and_dedup(df):
     # Drop rows with no headline text at all -- useless for labeling
     df = df[df["headline"].notna() & (df["headline"].str.strip() != "")]
 
-    # Step 1: drop exact duplicate links (skip blank links, can't compare those)
+    # Drop likely synthetic/placeholder rows (e.g. "Maize subsidies variant 905")
+    synthetic_mask = df["headline"].apply(is_synthetic)
+    num_synthetic = synthetic_mask.sum()
+    if num_synthetic > 0:
+        print(f"\nWarning: found {num_synthetic} likely synthetic/placeholder rows "
+            f"(matching pattern like 'variant 123') -- excluding them.")
+        df = df[~synthetic_mask]
+
+    #drop exact duplicate links (skip blank links, can't compare those)
     has_link = df["link"].notna() & (df["link"].str.strip() != "")
     with_link = df[has_link].drop_duplicates(subset="link", keep="first")
     without_link = df[~has_link]
     df = pd.concat([with_link, without_link], ignore_index=True)
     after_link_dedup = len(df)
 
-    # Step 2: drop near-identical headlines (normalized comparison)
+    #drop near-identical headlines (normalized comparison)
     df["_normalized"] = df["headline"].apply(normalize_headline)
     df = df.drop_duplicates(subset="_normalized", keep="first")
     df = df.drop(columns=["_normalized"])
