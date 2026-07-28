@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apt3010ua_sentiment_analysis"
+version = "1.0.0"
+description = "Kenyan News Headline Sentiment Analysis using FastAPI and Scikit-learn"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+include = ["src*", "app*"]

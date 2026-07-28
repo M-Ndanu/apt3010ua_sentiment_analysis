@@ -1,0 +1,4 @@
+Model,Accuracy,Precision,Recall,Macro F1
+Linear SVM,0.71,0.677,0.644,0.653
+Logistic Regression,0.714,0.683,0.642,0.652
+Naive Bayes,0.688,0.666,0.596,0.601
