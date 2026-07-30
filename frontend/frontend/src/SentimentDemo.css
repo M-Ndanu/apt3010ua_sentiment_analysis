@@ -1,0 +1,168 @@
+:root {
+    --sentiment-blue: #3d5a80;
+    --sentiment-blue-light: #8fa0b3;
+    --sentiment-text-main: #1c2733;
+    --sentiment-text-secondary: #5b6675;
+    --sentiment-border: #d6dce3;
+
+    --positive-color: #1a7f4e;
+    --positive-bg: #e7f6ee;
+    --neutral-color: #3d5a80;
+    --neutral-bg: #e8eef5;
+    --negative-color: #b3402b;
+    --negative-bg: #fbeae6;
+}
+
+/* PAGE LAYOUT */
+.sentimentPage {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--sentiment-text-main);
+}
+
+.sentimentContainer {
+    width: 100%;
+    max-width: 560px;
+}
+
+/* HEADER */
+.sentimentHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.sentimentHeaderLabel {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--sentiment-text-secondary);
+    text-transform: uppercase;
+}
+
+.sentimentTitle {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    line-height: 1.25;
+}
+
+.sentimentSubtitle {
+    font-size: 14.5px;
+    color: var(--sentiment-text-secondary);
+    margin: 0 0 28px;
+    line-height: 1.5;
+}
+
+/* FORM */
+.sentimentForm {
+    margin-bottom: 20px;
+}
+
+.sentimentInputRow {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.sentimentInput {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 15px;
+    border: 1.5px solid var(--sentiment-border);
+    border-radius: 10px;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.15s ease;
+}
+
+.sentimentInput:focus {
+    border-color: var(--sentiment-blue);
+}
+
+.sentimentSubmitButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--sentiment-blue);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    white-space: nowrap;
+}
+
+.sentimentSubmitButton:disabled {
+    background: var(--sentiment-blue-light);
+    cursor: default;
+}
+
+/* ERROR STATE */
+.sentimentError {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--negative-bg);
+    border: 1px solid #f0c9be;
+    border-radius: 10px;
+    color: #8a3421;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* RESULT CARD */
+.sentimentResultCard {
+    padding: 22px 24px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+}
+
+.sentimentResultLabel {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--sentiment-text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.sentimentResultValue {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.sentimentResultHeadline {
+    font-size: 13.5px;
+    color: var(--sentiment-text-secondary);
+    margin: 10px 0 0;
+    line-height: 1.5;
+}
+
+/* IDLE HINT */
+.sentimentIdleHint {
+    font-size: 13.5px;
+    color: #93a0af;
+    text-align: center;
+    margin-top: 8px;
+}
+
+/* SPINNER */
+.spin {
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
