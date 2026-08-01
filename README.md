@@ -1,6 +1,6 @@
 # Kenyan News Sentiment Analysis
 
-A machine learning application for sentiment analysis of Kenyan news headlines. The project classifies headlines into **positive**, **neutral**, or **negative** sentiment using NLP and a supervised classifier, served through a FastAPI backend with a small React demo frontend.
+A machine learning application for sentiment analysis of Kenyan news headlines. The project classifies headlines into **positive**, **neutral**, or **negative** sentiment using NLP and a supervised classifier, served through a FastAPI backend with a small React demonstration frontend.
 
 ---
 
@@ -12,7 +12,7 @@ A machine learning application for sentiment analysis of Kenyan news headlines. 
 * TF-IDF feature extraction
 * Model comparison across Logistic Regression, Linear SVM, and Multinomial Naive Bayes
 * A trained Linear SVM pipeline served via FastAPI (`POST /api/v1/predict`)
-* React + Vite demo UI that calls the API
+* React + Vite demonstration UI that calls the API
 
 ---
 
@@ -30,10 +30,10 @@ apt3010ua_sentiment_analysis/
 │       └── sentiment.py         # /, /health, /predict endpoints
 │
 ├── frontend/
-│   └── frontend/                # React + Vite demo UI (note the nested folder name)
+│   └── frontend/                # React + Vite demonstration UI (note the nested folder name)
 │       ├── src/
 │       │   ├── api.js            # fetch call to the backend
-│       │   ├── SentimentDemo.jsx
+│       │   ├── Sentimentdemonstration.jsx
 │       │   └── main.jsx
 │       ├── package.json
 │       └── vite.config.js
@@ -83,7 +83,7 @@ apt3010ua_sentiment_analysis/
 * NLTK (tokenization, stopwords, lemmatization)
 * Matplotlib, Seaborn (model comparison plots)
 * Joblib (model persistence)
-* React 18 + Vite (frontend demo)
+* React 18 + Vite (frontend demonstration)
 
 ---
 
@@ -222,10 +222,3 @@ Configured in `app/config.py`, the backend allows:
 * `http://localhost:5173`, `http://127.0.0.1:5173` (the Vite dev server's default port)
 
 ---
-
-
----
-
-## License
-
-This project is intended for academic and educational purposes.
