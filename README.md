@@ -1,25 +1,18 @@
-# apt3010ua_sentiment_analysis-
-Sentiment analysis of Kenyan news headlines using NLP - RSS/scraping-based data collection, weak-supervision auto-labeling, and a trained classifier. APT3010 term project.
-
-
 # Kenyan News Sentiment Analysis
 
-A machine learning application for sentiment analysis of Kenyan news headlines. The project classifies headlines into **Positive**, **Neutral**, or **Negative** sentiments using Natural Language Processing (NLP) and supervised machine learning. The application includes a production-style FastAPI backend for real-time sentiment prediction.
+A machine learning application for sentiment analysis of Kenyan news headlines. The project classifies headlines into **positive**, **neutral**, or **negative** sentiment using NLP and a supervised classifier, served through a FastAPI backend with a small React demonstration frontend.
 
 ---
 
 ## Features
 
-* Data collection and preprocessing of Kenyan news headlines
-* Exploratory Data Analysis (EDA)
-* TF-IDF feature engineering
-* Logistic Regression model with hyperparameter tuning
-* Linear SVM model with hyperparameter tuning
-* Multinomial Naive Bayes model with hyperparameter tuning
-* Model comparison using Accuracy, Precision, Recall, F1-score, and Confusion Matrix
-* Reusable preprocessing pipeline
-* Production-ready FastAPI backend
-* REST API for real-time sentiment prediction
+* Data collection scripts for Kenyan news headlines (RSS + scraping)
+* Weak-supervision / auto-labeling pipeline for building a labeled dataset
+* Text preprocessing (wire-prefix/teaser/source stripping, tokenization, stopword removal, lemmatization)
+* TF-IDF feature extraction
+* Model comparison across Logistic Regression, Linear SVM, and Multinomial Naive Bayes
+* A trained Linear SVM pipeline served via FastAPI (`POST /api/v1/predict`)
+* React + Vite demonstration UI that calls the API
 
 ---
 
@@ -28,252 +21,159 @@ A machine learning application for sentiment analysis of Kenyan news headlines. 
 ```text
 apt3010ua_sentiment_analysis/
 │
-├── app/
-│   ├── config.py
-│   ├── exceptions.py
-│   ├── main.py
-│   ├── routers/
-│   └── schemas.py
+├── app/                        # FastAPI backend
+│   ├── main.py                 # app factory, CORS, router registration
+│   ├── config.py                # settings (API prefix, CORS origins, model paths)
+│   ├── exceptions.py            # global exception handler
+│   ├── schemas.py                # request/response models
+│   └── routers/
+│       └── sentiment.py         # /, /health, /predict endpoints
 │
-├── src/
-│   ├── preprocessing.py
-│   ├── train.py
-│   ├── evaluate.py
-│   ├── compare_models.py
-│   ├── predict.py
-│   └── services.py
+├── frontend/
+│   └── frontend/                # React + Vite demonstration UI (note the nested folder name)
+│       ├── src/
+│       │   ├── api.js            # fetch call to the backend
+│       │   ├── Sentimentdemonstration.jsx
+│       │   └── main.jsx
+│       ├── package.json
+│       └── vite.config.js
 │
-├── models/
+├── src/                          # ML pipeline
+│   ├── preprocessing.py          # clean_text() shared by training + inference
+│   ├── train.py                  # trains + saves the Linear SVM pipeline used by the API
+│   ├── evaluate.py                # evaluates the saved pipeline on a held-out split
+│   ├── compare_models.py         # trains/compares LogReg, Linear SVM, Naive Bayes
+│   ├── predict.py                 # thin CLI-style wrapper around SentimentService
+│   └── services.py                # SentimentService — loads the pickled pipeline
+│
+├── scripts/                       # data collection / dataset merging utilities
+│   ├── rss_collector.py
+│   ├── news_scraper.py
+│   ├── dataset_extraction.py
+│   ├── merge.py
+│   └── final_merge.py
+│
+├── notebooks/                     # exploratory / labeling / evaluation notebooks
+│
+├── data/
+│   ├── raw/                       # scraped/collected headline CSVs
+│   ├── processed/                 # cleaned/merged headlines
+│   └── labeled/                   # auto-labeled + final labeled datasets
+│
+├── models/                         # committed model artifacts (see note below)
 │   ├── sentiment_pipeline.pkl
 │   ├── label_encoder.pkl
 │   └── model_comparison.csv
 │
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── labeled/
-│
-├── notebooks/
-├── requirements.txt
-├── pyproject.toml
+├── tests/                          # pytest suite (API + preprocessing + predict)
+├── requirements.txt                 # pinned deps (Linux/macOS, includes uvloop)
+├── requirements_windows.txt         # same deps, without the Unix-only uvloop
+├── pyproject.toml                    # package metadata only — no dependency list
+├── pytest.ini
 └── README.md
 ```
 
 ---
 
-# Technologies Used
+## Technologies Used
 
 * Python 3.10+
-* FastAPI
-* scikit-learn
-* Pandas
-* NumPy
-* NLTK
-* Matplotlib
-* Seaborn
-* Joblib
-* Uvicorn
+* FastAPI, Uvicorn, Pydantic
+* scikit-learn, pandas, NumPy
+* NLTK (tokenization, stopwords, lemmatization)
+* Matplotlib, Seaborn (model comparison plots)
+* Joblib (model persistence)
+* React 18 + Vite (frontend demonstration)
 
 ---
 
-# Machine Learning Pipeline
+## Backend Setup
 
-The project follows the standard machine learning workflow:
-
-1. Collect news headlines
-2. Clean and preprocess text
-3. TF-IDF feature extraction
-4. Train multiple machine learning models
-5. Hyperparameter tuning using GridSearchCV
-6. Evaluate and compare models
-7. Save the best model
-8. Deploy using FastAPI
-
----
-
-# Text Preprocessing
-
-The preprocessing pipeline performs:
-
-* Removal of wire-service prefixes
-* Removal of timestamps and teaser text
-* Removal of source-name suffixes
-* Lowercasing
-* Removal of punctuation and numbers
-* Tokenization
-* Stopword removal
-* Lemmatization
-
-The same preprocessing pipeline is reused during inference to ensure consistency between training and prediction.
-
----
-
-# Models
-
-The following models were trained and evaluated:
-
-* Logistic Regression
-* Linear Support Vector Machine (Linear SVM)
-* Multinomial Naive Bayes
-
-Each model was tuned using GridSearchCV.
-
-Evaluation metrics include:
-
-* Accuracy
-* Precision
-* Recall
-* Macro F1-score
-* Confusion Matrix
-
-The comparison results are exported to:
-
-```text
-models/model_comparison.csv
-```
-
----
-
-# Installation
-
-Clone the repository:
+See [app/README.md](app/README.md) for full backend instructions. Quick start:
 
 ```bash
 git clone <repository-url>
 cd apt3010ua_sentiment_analysis
+
+python -m venv .venv
+.venv\Scripts\activate        # Windows
+# source .venv/bin/activate   # Linux/macOS
+
+pip install -r requirements_windows.txt   # Windows
+# pip install -r requirements.txt         # Linux/macOS
+
+uvicorn app.main:app --reload
 ```
 
-Create a virtual environment:
+The API will be live at `http://127.0.0.1:8000` (docs at `/docs`). The pretrained model files in `models/` are committed to the repo, so the API runs out of the box without retraining.
+
+## Frontend Setup
+
+See [frontend/frontend/README.md](frontend/frontend/README.md) for full frontend instructions. Quick start:
 
 ```bash
-python3 -m venv .venv
+cd frontend/frontend
+npm install
+npm run dev
 ```
 
-Activate the environment:
-
-Linux/macOS
-
-```bash
-source .venv/bin/activate
-```
-
-Windows
-
-```bash
-.venv\Scripts\activate
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Install the project in editable mode:
-
-```bash
-pip install -e .
-```
+Opens at `http://localhost:5173` and talks to the backend at the URL in `VITE_API_BASE_URL` (defaults to `http://127.0.0.1:8000`, see `.env`). The backend must be running first.
 
 ---
 
-# Training the Model
+## Machine Learning Pipeline
 
-Run:
+1. Collect news headlines (`scripts/`)
+2. Auto-label / weak-supervise a training set (`notebooks/milestone2_labeling_pipeline.ipynb`)
+3. Clean and preprocess text (`src/preprocessing.py`)
+4. TF-IDF feature extraction
+5. Train and tune Logistic Regression, Linear SVM, and Naive Bayes (`src/compare_models.py`)
+6. Save the production pipeline — a **Linear SVM** (`src/train.py`)
+7. Evaluate the saved pipeline (`src/evaluate.py`)
+8. Serve it via FastAPI (`app/`)
+
+### Training the model
 
 ```bash
 python -m src.train
 ```
 
-Artifacts will be saved to:
+Reads `data/labeled/final_labeled_dataset.csv`, fits a `TfidfVectorizer` + `LinearSVC` pipeline (grid-searched over `C = [0.1, 1, 10]`), and saves:
 
 ```text
-models/
-├── sentiment_pipeline.pkl
-└── label_encoder.pkl
+models/sentiment_pipeline.pkl
+models/label_encoder.pkl
 ```
 
----
-
-# Evaluating the Model
-
-Run:
+### Evaluating the model
 
 ```bash
 python -m src.evaluate
 ```
 
-This script reports:
+Loads the saved pipeline, re-splits the same dataset (fixed `random_state=42`), and prints accuracy, a classification report, and a confusion matrix.
 
-* Accuracy
-* Precision
-* Recall
-* F1-score
-* Classification Report
-* Confusion Matrix
-
----
-
-# Comparing Models
-
-Run:
+### Comparing models
 
 ```bash
 python -m src.compare_models
 ```
 
-This script:
+Trains and tunes Logistic Regression, Linear SVM, and Multinomial Naive Bayes on the same split, prints per-model reports, shows confusion-matrix plots, and writes `models/model_comparison.csv`. **This script does not save a pickled pipeline** — only `src/train.py` produces the `.pkl` files the API loads.
 
-* Trains all three models
-* Tunes hyperparameters
-* Evaluates performance
-* Generates confusion matrices
-* Produces a comparison table
-* Exports the comparison to:
-
-```text
-models/model_comparison.csv
-```
-
----
-
-# Running the API
-
-Start the FastAPI server:
+### Running tests
 
 ```bash
-uvicorn app.main:app --reload
-```
-
-The API will be available at:
-
-```text
-http://127.0.0.1:8000
-```
-
-Interactive API documentation:
-
-```text
-http://127.0.0.1:8000/docs
-```
-
-Alternative OpenAPI documentation:
-
-```text
-http://127.0.0.1:8000/redoc
+pytest
 ```
 
 ---
 
-# API Endpoints
+## API Endpoints
 
-## Root
+Base prefix: **`/api/v1`**
 
-```http
-GET /api/v1/
-```
-
-Example Response
+### `GET /api/v1/`
 
 ```json
 {
@@ -283,15 +183,7 @@ Example Response
 }
 ```
 
----
-
-## Health Check
-
-```http
-GET /api/v1/health
-```
-
-Example Response
+### `GET /api/v1/health`
 
 ```json
 {
@@ -300,15 +192,9 @@ Example Response
 }
 ```
 
----
+### `POST /api/v1/predict`
 
-## Predict Sentiment
-
-```http
-POST /api/v1/predict
-```
-
-Request Body
+Request:
 
 ```json
 {
@@ -316,7 +202,7 @@ Request Body
 }
 ```
 
-Example Response
+Response:
 
 ```json
 {
@@ -324,18 +210,15 @@ Example Response
 }
 ```
 
+`headline` must be non-empty (`min_length=1`); an empty string returns `422`.
+
 ---
 
-# CORS
+## CORS
 
-The backend is configured to allow local frontend development for:
+Configured in `app/config.py`, the backend allows:
 
-* http://localhost:3000
-* http://127.0.0.1:3000
-* http://localhost:5173
-* http://127.0.0.1:5173
+* `http://localhost:3000`, `http://127.0.0.1:3000`
+* `http://localhost:5173`, `http://127.0.0.1:5173` (the Vite dev server's default port)
 
-
-# License
-
-This project is intended for academic and educational purposes.
+---
