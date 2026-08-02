@@ -1,0 +1,71 @@
+headline,human_label,predicted_label,confidence,matched_rule
+"‘I thought, I’ve tried everything else, why not give AI a shot?’: the long-lost family reunited by ChatGPT",positive,negative,1.95,"Crime: Murder, Sports: Defeat"
+Russia begins process to compensate kin of Kenyans killed in Ukraine war,positive,negative,0.99,Crime: Murder
+Heineken beats Sh56m fee claim by its lawyers,neutral,positive,0.96,Sports: Victory
+"Gachagua Explains Why Ruto Lost Ol Kalou, Says Mt Kenya Revolt Is Just Beginning",neutral,negative,0.96,Sports: Defeat
+Mbappe fires back at Paraguayan senator’s racist attack after France victory,negative,positive,0.96,Sports: Victory
+Court shields KTDA from corruption probe over tea factory loans,neutral,negative,0.96,Crime: Fraud
+"ODM won’t field presidential candidate, will back Ruto, says Oburu",neutral,positive,0.96,Sports: Victory
+Kenya Kwanza dismisses Gachagua's Ol Kalou victory claimsScript,neutral,positive,0.96,Sports: Victory
+Kidero acquitted of Sh213m graft charges,positive,negative,0.96,Crime: Fraud
+Traffic disrupted in Embu as youths celebrate DCP's Ol Kalou by-election victory - Citizen Digital,neutral,positive,0.96,Sports: Victory
+Sifuna Loses Senate Deputy Minority Whip Post After ODM Ouster,neutral,negative,0.96,Sports: Defeat
+"Duale dismisses Gachagua's Ol Kalou victory celebrations, says race was between DCP and Jubilee - Citizen Digital",negative,positive,0.96,Sports: Victory
+Paramount wins Warner Bros after Netflix walks away,neutral,positive,0.96,Sports: Victory
+"Who will win World Cup, Spain or Argentina? Supercomputer predicts champion",neutral,positive,0.96,Sports: Victory
+EACC recovers public assets worth Sh126m in Western Kenya anti-graft drive,positive,negative,0.96,Crime: Fraud
+Court upholds Oswago's conviction in Sh1.3bn graft case,positive,negative,0.96,Crime: Fraud
+SA's president wins bid to temporarily halt impeachment,neutral,positive,0.96,Sports: Victory
+"Gachagua exploits Ol Kalou victory, rallies Mt Kenya against Ruto",neutral,positive,0.96,Sports: Victory
+Outgoing governor gets cold feet over MP seatThe rival has won over many residents through generous donations.,neutral,positive,0.96,Sports: Victory
+Why vaccination immunity fades over time for some diseases,neutral,positive,0.93,Health: Vaccination
+Iran announces execution of two anti-govt protesters - Citizen Digital,negative,neutral,0.9,Government: Administrative Action
+PCEA announces major milestone after receiving five-year tax exemption from KRA,positive,neutral,0.9,Government: Administrative Action
+Motsepe hails African teams at World Cup 2026 as CAF announces key plans,positive,neutral,0.9,Government: Administrative Action
+Global leaders back new framework for AI governance at Shanghai Summit,positive,neutral,0.9,Government: Administrative Action
+Xi voices firm support for UN in meeting with Guterres,positive,neutral,0.9,Government: Administrative Action
+"KFS Announces New Rules for Timber, Wood Product Businesses",positive,neutral,0.9,Government: Administrative Action
+"Pritty Vishy announces social media break, says DJ journey left her feeling defeated and hated",negative,neutral,0.9,Government: Administrative Action
+PremiumWhy the 13th Parliament should never be forgiven,negative,neutral,0.9,Government: Administrative Action
+"Nairobi takes centre stage as global climate leaders chart path for sustainable citiesThe 3-day conference has brought together mayors, urban planners, academics, and development partners from across the world",positive,neutral,0.9,Government: Administrative Action
+"Ruto announces full funding for all students placed in universities, colleges",positive,neutral,0.9,Government: Administrative Action
+Court orders Ruto to reshuffle Cabinet within 120 Days,positive,neutral,0.9,Government: Administrative Action
+Government establishes committee to review unconstitutional laws,positive,neutral,0.9,Government: Administrative Action
+Ruto Appoints Ol Kalou By-Election Loser to Key State Role,negative,neutral,0.9,Government: Administrative Action
+One injured as Siaya nuclear project meeting turns chaotic,negative,neutral,0.9,Government: Administrative Action
+Why the 13th Parliament should never be forgiven,negative,neutral,0.9,Government: Administrative Action
+LSK announces nationwide court boycott over justice system concerns - Citizen Digital,negative,neutral,0.9,Government: Administrative Action
+KRA Announces 20-Hour Service Disruption Affecting eTIMS,negative,neutral,0.9,Government: Administrative Action
+Nairobi opens global climate conference with street art initiativeCommunity artists transformed public spaces with colourful murals depicting their vision for Nairobi’s future,positive,neutral,0.9,Government: Administrative Action
+Rachier to lead transition Committee for Premier League,positive,neutral,0.9,Government: Administrative Action
+Kenyan stars set to battle for glory at Paris Diamond League meeting,positive,neutral,0.9,Government: Administrative Action
+Burnham becomes new UK PM after meeting king,positive,neutral,0.9,Government: Administrative Action
+New UK PM Burnham stamps authority with cabinet shakeup,positive,neutral,0.9,Government: Administrative Action
+New UK PM announces tax cut for struggling pubs,positive,neutral,0.9,Government: Administrative Action
+3 hours agoAmbrose Rachier-led committee formed to plan new KPL seasonBy Angel ShantelThe top-flight competition has been operating as the FKF Premier League under the direct control of the federation.Read More,positive,neutral,0.9,Government: Administrative Action
+Tanzania’s parliament to convene without official opposition,negative,neutral,0.9,Government: Administrative Action
+Isaac Rutto faces calls for removal from JSC after attending UDA meeting,negative,neutral,0.9,Government: Administrative Action
+Gachagua says State agents secretly recorded his meeting with late MP...,negative,neutral,0.9,Government: Administrative Action
+Michael Oyamo convened meeting to deliver Sharon Otieno to her killers - Court - Citizen Digital,negative,neutral,0.9,Government: Administrative Action
+PS Oluga calls for stronger African health systems at AU meeting,negative,neutral,0.9,Government: Administrative Action
+Ex-Police Spokesman Charles Owino appointed gov't spokesperson in President Ruto's latest reshuffle - Citizen Digital,negative,neutral,0.9,Government: Administrative Action
+Kamran Pitafi Appointed as Judge for 2026 Global Recognition Awards,positive,neutral,0.9,Government: Administrative Action
+Cabinet shake-up looms as Ruto races to meet court gender rule deadline,positive,neutral,0.9,Government: Administrative Action
+Parliament committee urges TVETs to intensify student recruitment,positive,neutral,0.9,Government: Administrative Action
+AI and Digital Diplomacy Take Centre Stage at Major African Technology Conference,positive,neutral,0.9,Government: Administrative Action
+Safari Soles Tours Announces Custom Kenya Safari Itineraries,positive,neutral,0.9,Government: Administrative Action
+Nairobi to Host Three U.S. Music Companies After Ruto Meeting,positive,neutral,0.9,Government: Administrative Action
+Sakaja Cabinet approves underground railway line linking Nairobi CBD to Eastlands - Citizen Digital,positive,neutral,0.9,Government: Administrative Action
+Leaders convene in Nairobi for Africa Tech leadership conference,positive,neutral,0.9,Government: Administrative Action
+New UK Prime Minister announces tax cut for struggling pubs - Citizen Digital,positive,neutral,0.9,Government: Administrative Action
+The people's voice should guide every vote in Parliament.,negative,neutral,0.9,Government: Administrative Action
+"Parliament Explains New Cabinet Vetting Featuring Malala, Winnie Odinga & Others",positive,neutral,0.9,Government: Administrative Action
+Sakaja's cabinet approves phase I of metropolitan transit system,positive,neutral,0.9,Government: Administrative Action
+Singer Celine Dion announces comeback after health battle,positive,neutral,0.9,Government: Administrative Action
+"President Ruto Hosts 5,000 Artisans at State House, Announces Civil Servants’ Salary Increase",positive,neutral,0.9,Government: Administrative Action
+New UK PM Burnham stamps authority with cabinet shakeup ,positive,neutral,0.9,Government: Administrative Action
+Ruto Appoints Former Bumula MP Moses Mabonga to Energy Regulator Board,negative,neutral,0.9,Government: Administrative Action
+Michael Oyamo convened meeting to deliver Sharon Otieno to her killers ,negative,neutral,0.9,Government: Administrative Action
+Charles Owino appointed as Government Spokesperson,negative,neutral,0.9,Government: Administrative Action
+Ruto Announces Full Funding for All University & College Students,positive,neutral,0.9,Government: Administrative Action
+Charles Owino appointed Government Spokesperson,negative,neutral,0.9,Government: Administrative Action

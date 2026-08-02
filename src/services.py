@@ -1,31 +1,33 @@
-from pathlib import Path
+from __future__ import annotations
 
-import joblib
-
+from src.model_loader import ModelLoader
 from src.preprocessing import clean_text
 
 
 class SentimentService:
     """
-    Loads the trained model once and serves predictions.
+    Performs sentiment inference using loaded model artifacts.
     """
 
-    def __init__(self):
+    def __init__(
+        self,
+        loader: ModelLoader,
+    ) -> None:
 
-        base_dir = Path(__file__).resolve().parent.parent
+        self.pipeline = loader.pipeline
+        self.encoder = loader.encoder
 
-        self.pipeline = joblib.load(
-            base_dir / "models" / "sentiment_pipeline.pkl"
-        )
-
-        self.encoder = joblib.load(
-            base_dir / "models" / "label_encoder.pkl"
-        )
-
-    def predict(self, headline: str) -> str:
+    def predict(
+        self,
+        headline: str,
+    ) -> str:
 
         cleaned = clean_text(headline)
 
-        prediction = self.pipeline.predict([cleaned])
+        prediction = self.pipeline.predict(
+            [cleaned]
+        )
 
-        return self.encoder.inverse_transform(prediction)[0]
+        return self.encoder.inverse_transform(
+            prediction
+        )[0]

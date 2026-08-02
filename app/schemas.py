@@ -5,9 +5,15 @@ class PredictionRequest(BaseModel):
     headline: str = Field(
         ...,
         min_length=1,
-        description="News headline to analyze"
+        max_length=500,
+        examples=[
+            "Kenya's inflation falls to 3.8%"
+        ],
+        description="News headline to analyze",
     )
 
 
 class PredictionResponse(BaseModel):
-    sentiment: str
+    sentiment: str = Field(
+        description="Predicted sentiment label"
+    )

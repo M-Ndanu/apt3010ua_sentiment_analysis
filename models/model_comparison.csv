@@ -1,4 +1,4 @@
-Model,Accuracy,Precision,Recall,Macro F1
-Linear SVM,0.71,0.677,0.644,0.653
-Logistic Regression,0.714,0.683,0.642,0.652
-Naive Bayes,0.688,0.666,0.596,0.601
+Model,Accuracy,Macro F1,CV Score,Best Parameters
+Logistic Regression,0.7197,0.6964,0.6974,"{'classifier__C': 10, 'classifier__solver': 'liblinear'}"
+Linear SVM,0.7157,0.6949,0.693,{'classifier__C': 1}
+Naive Bayes,0.7157,0.6919,0.6853,{'classifier__alpha': 0.5}
