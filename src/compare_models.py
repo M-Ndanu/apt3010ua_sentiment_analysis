@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 from collections.abc import Mapping
+import re
 
 from sklearn.metrics import (
     accuracy_score,
@@ -81,6 +82,7 @@ def evaluate_model(
         param_grid=param_grid,
         cv=settings.CV_FOLDS,
         scoring="f1_macro",
+        refit=True,
         n_jobs=-1,
         verbose=1,
     )
@@ -214,11 +216,13 @@ def save_confusion_matrix(
 
     plt.tight_layout()
 
-    filename = (
-        model_name.lower()
-        .replace(" ", "_")
-        .replace("-", "_")
-    )
+    
+
+    filename = re.sub(
+        r"[^a-z0-9]+",
+        "_",
+        model_name.lower(),
+    ).strip("_")
 
     output = (
         settings.CONFUSION_MATRIX_DIR
@@ -301,9 +305,15 @@ def compare_models() -> None:
             model_name,
         )
 
+    SORT_METRIC = "Macro F1"
+
     comparison = (
         pd.DataFrame(results)
-        SORT_METRIC = "Macro F1".reset_index(drop=True)
+        .sort_values(
+            by=SORT_METRIC,
+            ascending=False,
+        )
+        .reset_index(drop=True)
     )
 
     comparison = comparison.round(4)
